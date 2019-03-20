@@ -5,8 +5,8 @@ from pymongo import MongoClient
 client = MongoClient()
 db = client.betAOphanim2
 skeds = db.Skeds
-pprint.pprint(skeds.find_one())
-query =[
+# pprint.pprint(skeds.find_one())
+pipeline = [
     {
         '$unwind': {
             'path': '$tasks'
@@ -23,3 +23,5 @@ query =[
         }
     }
 ]
+
+pprint.pprint(list(skeds.aggregate(pipeline)))
