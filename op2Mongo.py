@@ -13,13 +13,15 @@ pipeline = [
         }
     }, {
         '$match': {
-            'tasks.displayName': 'Replenish Item'
+            'tasks.status':'complete'
         }
     }, {
         '$project': {
-            'status': 1,
             'tasks.effort': 1,
-            'tasks.priority': 1
+            'tasks.priority': 1,
+            'tasks.status': 1,
+            'tasks.startedAt': 1,
+            'tasks.completedAt': 1
         }
     }
 ]
