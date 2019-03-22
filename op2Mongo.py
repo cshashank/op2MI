@@ -27,6 +27,6 @@ task_effort = list(skeds.aggregate(pipeline))
 # pprint.pprint(list(skeds.aggregate(pipeline)))
 
 for tef in skeds.aggregate(pipeline):
-    pprint.pprint(tef)
+    # pprint.pprint(tef)
     task = tef['tasks']
     pprint.pprint(task['effort'])
