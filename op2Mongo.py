@@ -1,5 +1,6 @@
 import pprint
-
+import pandas as pd
+from op2Util import getDate
 from pymongo import MongoClient
 
 client = MongoClient()
@@ -27,8 +28,5 @@ pipeline = [
 ]
 task_effort = list(skeds.aggregate(pipeline))
 # pprint.pprint(list(skeds.aggregate(pipeline)))
-
-for tef in skeds.aggregate(pipeline):
-    # pprint.pprint(tef)
-    task = tef['tasks']
-    pprint.pprint(task['effort'])
+df = pd.DataFrame(skeds.aggregate(pipeline))
+print(df.head()['tasks'])
