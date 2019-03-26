@@ -5,7 +5,7 @@ import op2Util as op2u
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client.betAOphanim2
+db = client.betaOphanim2
 skeds = db.Skeds
 # pprint.pprint(skeds.find_one())
 pipeline = [
@@ -20,6 +20,7 @@ pipeline = [
     }, {
         '$project': {
             '_id':0,
+            'tasks.displayName': 1,
             'tasks.effort': 1,
             'tasks.priority': 1,
             'tasks.status': 1,
@@ -35,6 +36,8 @@ df = pd.DataFrame.from_records(taskList)
 # df1 = df['tasks']
 # print(df.head())
 # op2u.testPdDict()
-listTaskDict=op2u.convertTasksToDict(taskList)
-dfl = pd.DataFrame(listTaskDict)
+listTaskEffort=op2u.convertTasksToDict(taskList)
+dfl = pd.DataFrame(listTaskEffort)
+op2Columns=['task','effort']
+dfl.columns=op2Columns
 print(dfl.head())

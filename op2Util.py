@@ -37,13 +37,14 @@ def testPdDict():
 
 def convertTasksToDict(taskList):
     print('in convert task to dict')
-    listTaskDict=[]
+    listTaskEffort=[]
     for task in taskList:
-        startedDateTime = task['startedAt']
-        endDateTime = task['completedAt']
-        timeTaken = endDateTime-startedDateTime
-        print(timeTaken)
-        listTaskDict.append(task['tasks'])
+        listTasks = task['tasks']
+        startedDateTime = listTasks['startedAt']
+        endDateTime = listTasks['completedAt']
+        timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
+        # listTaskDict.append['timeTake':timeTaken]
+        listTaskEffort.append([listTasks['displayName'],timeTaken])
 
-    # print(listTaskDict)
-    return listTaskDict
+    # print(listTaskEffort)
+    return listTaskEffort
