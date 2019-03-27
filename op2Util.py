@@ -2,6 +2,7 @@ from dateutil import parser
 import time
 import datetime
 import pandas as pd
+import numpy as np
 from datetime import date
 import pymongo
 
@@ -43,8 +44,13 @@ def convertTasksToDict(taskList):
         startedDateTime = listTasks['startedAt']
         endDateTime = listTasks['completedAt']
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
+        rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([listTasks['displayName'],timeTaken])
-
+        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())])
+    df_t = pd.DataFrame(listTaskEffort)
+    print(df_t.dtypes)
+    df_t.round()
+    print(df_t.head())
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     # print(listTaskEffort)
     return listTaskEffort

@@ -39,5 +39,4 @@ df = pd.DataFrame.from_records(taskList)
 listTaskEffort=op2u.convertTasksToDict(taskList)
 dfl = pd.DataFrame(listTaskEffort)
 op2Columns=['task','effort']
-dfl.columns=op2Columns
-print(dfl.head())
+# print(dfl.head())
