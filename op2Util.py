@@ -46,11 +46,13 @@ def convertTasksToDict(taskList):
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())])
+        listTaskEffort.append([listTasks['_id'],(timeTaken.total_seconds())])
     df_t = pd.DataFrame(listTaskEffort)
     print(df_t.dtypes)
-    df_t.round()
+    df_t.columns= ['task', 'effort']
+    decimals=2
+    # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
+    df_t.effort=df_t.effort.round(decimals)
     print(df_t.head())
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
     # print(listTaskEffort)
     return listTaskEffort

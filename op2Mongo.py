@@ -20,6 +20,7 @@ pipeline = [
     }, {
         '$project': {
             '_id':0,
+            'tasks._id': 1,
             'tasks.displayName': 1,
             'tasks.effort': 1,
             'tasks.priority': 1,
