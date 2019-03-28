@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 from datetime import date
 import pymongo
+import matplotlib.pyplot as plt
 
 def getDate():
     from datetime import datetime
@@ -46,11 +47,18 @@ def convertTasksToDict(taskList):
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())])
+        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
     print(df_t.dtypes)
-    df_t.round()
+    df_t.columns= ['task', 'effort']
+    decimals=2
+    # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
+    df_t.effort = df_t.effort.round(decimals)
     print(df_t.head())
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+    df_t2=df_t.groupby('task').mean()
+    df_t2.effort = df_t2.effort.round(decimals)
+    print(df_t2.head())
+    print(df_t2.count)
+    df_t.plot(kind='bar', x='task', y='effort', color='red')
     # print(listTaskEffort)
     return listTaskEffort
