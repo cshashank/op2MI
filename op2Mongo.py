@@ -5,7 +5,7 @@ import op2Util as op2u
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client.betaOphanim2
+db = client.betAOphanim2
 skeds = db.Skeds
 # pprint.pprint(skeds.find_one())
 pipeline = [
@@ -20,6 +20,7 @@ pipeline = [
     }, {
         '$project': {
             '_id':0,
+            '_SkedID': 1,
             'tasks._id': 1,
             'tasks.displayName': 1,
             'tasks.effort': 1,

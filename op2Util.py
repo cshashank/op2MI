@@ -40,6 +40,7 @@ def testPdDict():
 def convertTasksToDict(taskList):
     print('in convert task to dict')
     listTaskEffort=[]
+    skedId = taskList['_SkedID']
     for task in taskList:
         listTasks = task['tasks']
         startedDateTime = listTasks['startedAt']
@@ -47,11 +48,11 @@ def convertTasksToDict(taskList):
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())/60])
+        listTaskEffort.append(skedId,[listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
     print(df_t.dtypes)
-    df_t.columns= ['task', 'effort']
-    decimals=2
+    df_t.columns = ['skedId','task', 'effort']
+    decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
     print(df_t.head())
@@ -60,5 +61,7 @@ def convertTasksToDict(taskList):
     print(df_t2.head())
     print(df_t2.count)
     df_t.plot(kind='bar', x='task', y='effort', color='red')
+    # plt.plot(range(10))
+    # plt.show()
     # print(listTaskEffort)
     return listTaskEffort
