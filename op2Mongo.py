@@ -5,7 +5,7 @@ import op2Util as op2u
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client.betAOphanim2
+db = client.betaOphanim2
 skeds = db.Skeds
 # pprint.pprint(skeds.find_one())
 pipeline = [
@@ -38,7 +38,8 @@ df = pd.DataFrame.from_records(taskList)
 # df1 = df['tasks']
 # print(df.head())
 # op2u.testPdDict()
-listTaskEffort=op2u.convertTasksToDict(taskList)
-dfl = pd.DataFrame(listTaskEffort)
-op2Columns=['task','effort']
+dfTaskEffort=op2u.createTaskEffortDF(taskList)
+op2u.getEffortAverage(dfTaskEffort)
+# dfl = pd.DataFrame(listTaskEffort)
+# op2Columns=['task','effort']
 # print(dfl.head())

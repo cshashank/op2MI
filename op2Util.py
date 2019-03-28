@@ -37,10 +37,10 @@ def testPdDict():
     df1 = pd.DataFrame(temp)
     print(df1.head())
 
-def convertTasksToDict(taskList):
+def createTaskEffortDF(taskList):
     print('in convert task to dict')
     listTaskEffort=[]
-    skedId = taskList['_SkedID']
+    # skedId = taskList['_SkedID']
     for task in taskList:
         listTasks = task['tasks']
         startedDateTime = listTasks['startedAt']
@@ -48,20 +48,24 @@ def convertTasksToDict(taskList):
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append(skedId,[listTasks['displayName'],(timeTaken.total_seconds())/60])
+        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
     print(df_t.dtypes)
-    df_t.columns = ['skedId','task', 'effort']
+    df_t.columns = ['task', 'effort']
     decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
     print(df_t.head())
-    df_t2=df_t.groupby('task').mean()
-    df_t2.effort = df_t2.effort.round(decimals)
-    print(df_t2.head())
-    print(df_t2.count)
-    df_t.plot(kind='bar', x='task', y='effort', color='red')
+    # getEffortAverage(df_t)
+    # print(listTaskEffort)
+    return df_t
+
+def getEffortAverage(effortsDf):
+    decimals = 2
+    df = effortsDf.groupby('task').mean()
+    df.effort = df.effort.round(decimals)
+    print(df.head())
+    print(df.count)
+    # df.plot(kind='bar', x='task', y='effort', color='red')
     # plt.plot(range(10))
     # plt.show()
-    # print(listTaskEffort)
-    return listTaskEffort
