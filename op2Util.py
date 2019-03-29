@@ -40,18 +40,18 @@ def testPdDict():
 def createTaskEffortDF(taskList):
     print('in convert task to dict')
     listTaskEffort=[]
-    # skedId = taskList['_SkedID']
     for task in taskList:
+        skedId = task['_SkedID']
         listTasks = task['tasks']
         startedDateTime = listTasks['startedAt']
         endDateTime = listTasks['completedAt']
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([listTasks['displayName'],(timeTaken.total_seconds())/60])
+        listTaskEffort.append([skedId,listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
     print(df_t.dtypes)
-    df_t.columns = ['task', 'effort']
+    df_t.columns = ['skedId','task', 'effort']
     decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)

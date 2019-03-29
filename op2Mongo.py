@@ -39,7 +39,7 @@ df = pd.DataFrame.from_records(taskList)
 # print(df.head())
 # op2u.testPdDict()
 dfTaskEffort=op2u.createTaskEffortDF(taskList)
-op2u.getEffortAverage(dfTaskEffort)
+# op2u.getEffortAverage(dfTaskEffort)
 # dfl = pd.DataFrame(listTaskEffort)
 # op2Columns=['task','effort']
 # print(dfl.head())
