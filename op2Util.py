@@ -56,6 +56,8 @@ def createTaskEffortDF(taskList):
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
     print(df_t.head())
+
+    getSkedEffortAverage(df_t)
     # getEffortAverage(df_t)
     # print(listTaskEffort)
     return df_t
@@ -69,3 +71,10 @@ def getEffortAverage(effortsDf):
     # df.plot(kind='bar', x='task', y='effort', color='red')
     # plt.plot(range(10))
     # plt.show()
+
+def getSkedEffortAverage(effortsDf):
+    decimals = 2
+    df = effortsDf.groupby(['skedId','task']).mean()
+    df.effort = df.effort.round(decimals)
+    print(df.head())
+    print(df.count)
