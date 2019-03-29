@@ -77,4 +77,4 @@ def getSkedEffortAverage(effortsDf):
     df = effortsDf.groupby(['skedId','task']).mean()
     df.effort = df.effort.round(decimals)
     print(df.head())
-    print(df.count)
+    # print(df.count)
