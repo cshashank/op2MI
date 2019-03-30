@@ -50,14 +50,15 @@ def createTaskEffortDF(taskList):
         # listTaskDict.append['timeTake':timeTaken]
         listTaskEffort.append([skedId,listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
-    print(df_t.dtypes)
+    # print(df_t.dtypes)
     df_t.columns = ['skedId','task', 'effort']
     decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
-    print(df_t.head())
+    # print(df_t.head())
 
-    getSkedEffortAverage(df_t)
+    # getSkedEffortAverage(df_t)
+    getSkedEffortAverageForTask(df_t, "Arrange Bar Stools in Bar Area")
     # getEffortAverage(df_t)
     # print(listTaskEffort)
     return df_t
@@ -74,10 +75,21 @@ def getEffortAverage(effortsDf):
 
 def getSkedEffortAverage(effortsDf):
     decimals = 2
-    arrangeFilterDf = effortsDf['task'] == "Arrange Bar Stools in Bar Area"
+    # print(arrangeDf.head())
+    df = effortsDf.groupby(['skedId','task']).mean()
+    df = arrangeDf.groupby(['skedId']).mean()
+    df.effort = df.effort.round(decimals)
+    print(df.head(20))
+    # print(df.count)
+
+def getSkedEffortAverageForTask(effortsDf,taskName):
+    decimals = 2
+    # arrangeFilterDf = effortsDf['task'] == "Arrange Bar Stools in Bar Area"
+    arrangeFilterDf = effortsDf['task'] == taskName
     arrangeDf = effortsDf[arrangeFilterDf]
-    print(arrangeDf.head())
+    # print(arrangeDf.head())
     # df = effortsDf.groupby(['skedId','task']).mean()
-    # df.effort = df.effort.round(decimals)
-    # print(df.head(20))
+    df = arrangeDf.groupby(['skedId']).mean()
+    df.effort = df.effort.round(decimals)
+    print(df.head(20))
     # print(df.count)
