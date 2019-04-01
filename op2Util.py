@@ -42,24 +42,25 @@ def createTaskEffortDF(taskList):
     listTaskEffort=[]
     for task in taskList:
         skedId = task['_SkedID']
+        skedDate = task['_dateCreated']
         listTasks = task['tasks']
         startedDateTime = listTasks['startedAt']
         endDateTime = listTasks['completedAt']
         timeTaken = pd.to_datetime(endDateTime)-pd.to_datetime(startedDateTime)
         rEffort = timeTaken.round
         # listTaskDict.append['timeTake':timeTaken]
-        listTaskEffort.append([skedId,listTasks['displayName'],(timeTaken.total_seconds())/60])
+        listTaskEffort.append([skedId,skedDate.strftime("%a"),listTasks['displayName'],(timeTaken.total_seconds())/60])
     df_t = pd.DataFrame(listTaskEffort)
     # print(df_t.dtypes)
-    df_t.columns = ['skedId','task', 'effort']
+    df_t.columns = ['skedId','day','task', 'effort']
     decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
-    # print(df_t.head())
+    print(df_t.head())
 
     # getSkedEffortAverage(df_t)
     # getSkedEffortAverageForTask(df_t, "Arrange Bar Stools in Bar Area")
-    getDayOfWeek()
+    # getDayOfWeek(skedDate)
     # getEffortAverage(df_t)
     # print(listTaskEffort)
     return df_t
@@ -96,9 +97,6 @@ def getSkedEffortAverageForTask(effortsDf,taskName):
     print(df.head(20))
     # print(df.count)
 
-def getDayOfWeek():
-    # skedTime= datetime.datetime(2019-02-04 17:11:37.110)
-    skedTime= datetime.datetime(2019,2,4,17,11,37)
-    # skedTime = datetime.datetime.now()
-    print(skedTime)
-    print(skedTime.strftime("%a"))
+def getDayOfWeek(skedDate):
+    print(skedDate.year)
+    print(skedDate.strftime("%a"))

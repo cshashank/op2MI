@@ -21,6 +21,7 @@ pipeline = [
         '$project': {
             '_id':0,
             '_SkedID': 1,
+            '_dateCreated': 1,
             'tasks._id': 1,
             'tasks.displayName': 1,
             'tasks.effort': 1,
