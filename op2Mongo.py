@@ -15,7 +15,8 @@ pipeline = [
         }
     }, {
         '$match': {
-            'tasks.status':'complete'
+            'tasks.status':'complete',
+            'tasks.displayName': 'Bus Dishes in Park'
         }
     }, {
         '$project': {

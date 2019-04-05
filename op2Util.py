@@ -89,9 +89,9 @@ def getSkedEffortAverageByDay(effortsDf):
     # print(arrangeDf.head())
     df = effortsDf.groupby(['day','skedId','task']).mean()
     # df = arrangeDf.groupby(['skedId']).mean()
-    df.effort = df.effort.round(decimals)
-    print(df.head(160))
-    # print(df.count)
+    print('@@@@@@@@@@@@@@@@@@@')
+    print(df.count())
+    print(df)
 
 def getSkedEffortAverageForTask(effortsDf,taskName):
     decimals = 2
