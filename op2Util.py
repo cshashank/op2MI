@@ -57,7 +57,7 @@ def createTaskEffortDF(taskList):
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
     print(df_t.head())
-
+    getSkedEffortAverageByDay(df_t)
     # getSkedEffortAverage(df_t)
     # getSkedEffortAverageForTask(df_t, "Arrange Bar Stools in Bar Area")
     # getDayOfWeek(skedDate)
@@ -82,6 +82,15 @@ def getSkedEffortAverage(effortsDf):
     df = arrangeDf.groupby(['skedId']).mean()
     df.effort = df.effort.round(decimals)
     print(df.head(20))
+    # print(df.count)
+
+def getSkedEffortAverageByDay(effortsDf):
+    decimals = 2
+    # print(arrangeDf.head())
+    df = effortsDf.groupby(['day','skedId','task']).mean()
+    # df = arrangeDf.groupby(['skedId']).mean()
+    df.effort = df.effort.round(decimals)
+    print(df.head(160))
     # print(df.count)
 
 def getSkedEffortAverageForTask(effortsDf,taskName):
