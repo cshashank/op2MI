@@ -90,6 +90,7 @@ def getSkedEffortAverageByDay(effortsDf):
     df = effortsDf.groupby(['day','skedId','task']).mean()
     # df = arrangeDf.groupby(['skedId']).mean()
     print('@@@@@@@@@@@@@@@@@@@')
+    df.effort = df.effort.round(2)
     print(df.count())
     print(df)
 

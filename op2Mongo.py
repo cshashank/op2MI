@@ -45,3 +45,10 @@ dfTaskEffort=op2u.createTaskEffortDF(taskList)
 # dfl = pd.DataFrame(listTaskEffort)
 # op2Columns=['task','effort']
 # print(dfl.head())
+
+# createTaskEffortDF
+# getEffortAverage
+# getSkedEffortAverage
+# getSkedEffortAverageByDay
+# getSkedEffortAverageForTask
+# getDayofWeek
