@@ -56,12 +56,12 @@ def createTaskEffortDF(taskList):
     decimals = 2
     # df_t.effort=df_t.effort.apply(lambda x: round(x,decimals))
     df_t.effort = df_t.effort.round(decimals)
-    print(df_t.head())
-    getSkedEffortAverageByDay(df_t)
+    # print(df_t.head())
+    # getSkedEffortAverageByDay(df_t)
     # getSkedEffortAverage(df_t)
     # getSkedEffortAverageForTask(df_t, "Arrange Bar Stools in Bar Area")
     # getDayOfWeek(skedDate)
-    # getEffortAverage(df_t)
+    getEffortAverage(df_t)
     # print(listTaskEffort)
     return df_t
 
@@ -69,11 +69,20 @@ def getEffortAverage(effortsDf):
     decimals = 2
     df = effortsDf.groupby('task').mean()
     df.effort = df.effort.round(decimals)
-    print(df.head())
-    print(df.count)
-    # df.plot(kind='bar', x='task', y='effort', color='red')
-    # plt.plot(range(10))
-    # plt.show()
+    print('^^^^^^^^^^^^^^')
+    df_effort = effortsDf
+    del df_effort['day']
+    del df_effort['task']
+    print(df_effort.head())
+
+    # print(df_plot.head())
+    # print(df_plot.count)
+    # df_plot=df_plot.skedId
+    # print(df_plot.head())
+
+    df.plot(kind='bar', x='skedId', y='effort', color='red')
+    plt.plot(range(100))
+    plt.show()
 
 def getSkedEffortAverage(effortsDf):
     decimals = 2
