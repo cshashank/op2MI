@@ -5,7 +5,7 @@ import op2Util as op2u
 from pymongo import MongoClient
 
 client = MongoClient()
-db = client.betAOphanim2
+db = client.betaOphanim2
 skeds = db.Skeds
 # pprint.pprint(skeds.find_one())
 pipeline = [
