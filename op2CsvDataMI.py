@@ -22,3 +22,6 @@ task_effort_mean.plot(kind='bar', x='TaskId', y='effort', color='red')
 plt.plot(range(100))
 plt.show()
 
+groupSkedTask = df['Effort'].groupby([df['SkedId'],df['Day'],df['TaskId']])
+sked_task_effort_mean = groupSkedTask.mean() 
+print(sked_task_effort_mean)
