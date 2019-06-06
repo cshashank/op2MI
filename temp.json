@@ -1,0 +1,4 @@
+{ "_id" : 1, "name" : "task1" }
+{ "_id" : 2, "name" : "rule1", "triggers" : "task1" }
+{ "_id" : 3, "name" : "event1", "triggers" : "rule1" }
+{ "_id" : 4, "name" : "event2", "triggers" : "rule2" }
